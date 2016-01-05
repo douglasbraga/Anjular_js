@@ -1,0 +1,58 @@
+﻿
+<html ng-app="PhoneBook">
+<head>
+	<title>Phone Book</title>
+	<link rel="stylesheet" type="text/css" href="lib/bootstrap/bootstrap.css">
+	<style>
+		.jumbotron {
+			width: 400px;
+			text-align: center;
+			margin-top: 20px;
+			margin-left: auto;
+			margin-right: auto;
+		}
+		.table {
+			margin-top: 20px;
+		}
+		.form-control {
+			margin-bottom: 5px;
+		}
+	</style>
+	<script src="lib/angular/angular.js"></script>
+    <script>
+        angular.module("PhoneBook", []);
+        angular.module("PhoneBook").controller("PhoneBookCtrl", function ($scope) {
+            $scope.app = "Phone Book";
+            $scope.datas = [
+				{name: "Pedro", phone: "99998888"},
+				{name: "Ana", phone: "99998877"},
+				{name: "Maria", phone: "99998866"}
+			];
+            $scope.addData = function (data) {
+                $scope.datas.push(angular.copy(data));
+                delete $scope.data;
+            };
+        });
+	</script>
+</head>
+<body ng-controller="PhoneBookCtrl">
+	<div class="jumbotron">
+		<h3>{{app}}</h3>
+		<table class="table table-striped">
+			<tr>
+				<th>Name</th>
+				<th>Phone</th>
+			</tr>
+			<tr ng-repeat="data in datas">
+				<td>{{data.name}}</td>
+				<td>{{data.phone}}</td>
+			</tr>
+		</table>
+		<hr/>
+		<input class="form-control" type="text" ng-model="data.name" placeholder="Name"/>
+		<input class="form-control" type="text" ng-model="data.phone" placeholder="Phone"/>
+		<button class="btn btn-primary btn-block" ng-click="addData(data)">Add Data</button>
+		{{data}}
+	</div>
+</body>
+</html>
